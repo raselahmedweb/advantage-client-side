@@ -9,12 +9,12 @@ export default function About() {
       <div className="flex-row md:flex justify-center md:justify-between items-stretch space-y-5 md:space-y-0 space-x-0 md:space-x-5">
         <div className="flex flex-col justify-between rounded-xl shadow p-5 w-full md:w-1/2 bg-white">
           <div>
-            <h1 className="text-4xl font-bold mb-2">
+            <h1 className="text-2xl md:text-4xl font-bold mb-2">
             About Us
             </h1>
           </div>
           <div>
-            <p className="text-black text-lg font-semibold">
+            <p className="text-black text-l md:text-lg font-semibold">
               <b>Advantage Venture</b> is a leading crypto consulting company offering
               end-to-end solutions to drive blockchain projects from concept to
               success. We specialize in providing essential services that

@@ -41,7 +41,7 @@ export default function VarifiedScout() {
     <Container id="varifiedScout">
       <div className="flex-row space-y-5 bg-white rounded-xl shadow p-5 md:p-5">
         <div className="mb-5 text-center">
-          <h3 className="text-3xl font-bold">Our Varified Scoutes</h3>
+          <h3 className="text-2xl md:text-3xl font-bold">Our Varified Scouts</h3>
           <div className="my-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
           <p className="text-gray-500">
             Write telegram{" "}

@@ -39,9 +39,9 @@ export default function Team() {
   return (
     <Container id="team">
       <div className="flex-row space-y-5 bg-black text-white rounded-xl shadow p-5">
-        <div className="md:w-1/2 lg:w-1/3 text-center m-auto">
-          <h2 className="text-3xl font-bold">Advantage Team</h2>
-          <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
+        <div className="m-auto">
+          <h2 className="text-xl md:text-3xl font-bold md:text-center">Advantage Team</h2>
+          <div className="mt-3 border-t border-2 border-yellow-400 mx-0 md:mx-auto w-24"></div>
         </div>
         <div className="flex flex-wrap justify-center md:justify-start">
           {teamMember ? (
@@ -49,10 +49,10 @@ export default function Team() {
               return (
                 <div
                   key={index}
-                  className="md:pe-5 mb-5 sm:w-4/5 md:w-1/2 xl:w-1/3 2xl:w-1/4"
+                  className="pe-2 text-start md:pe-5 mb-5 w-1/2 xl:w-1/3 2xl:w-1/4"
                 >
                   <div className="rounded shadow-lg z-50">
-                    <div className="relative overflow-hidden w-full h-64">
+                    <div className="relative overflow-hidden w-full h-32 sm:h-40 md:h-64">
                       <Image
                         className="object-cover"
                         src={`http://localhost:4000/photos/team/${member.photo}`}
@@ -63,25 +63,28 @@ export default function Team() {
 
                     <div className="pt-3">
                       <div className="space-y-1">
-                        <h2 className="text-xl md:text-2xl font-bold text-green-500">
+                        <h2 className="text-md md:text-2xl font-bold text-green-500">
                           {member.name}
                         </h2>
-                        <p className="text-gray-400">{member.title}</p>
+                        <p className="text-gray-400 text-sm md:text-lg">{member.title}</p>
                         <p>
+                        <span
+  className={`text-sm md:text-base block overflow-hidden transition-all duration-0 ease-in-out ${
+    !openItems[member._id] ? "max-h-[1000px]" : "max-h-0"
+  }`}
+>
+  {openItems[member._id]
+    ? member.description // Show full content if the item is open
+    : (typeof window !== "undefined" && window.innerWidth < 768)
+    ? member.description.substring(0, 50)
+    : member.description.substring(0, 100)}
+</span>
+
                           <span
-                            className={`block overflow-hidden transition-all duration-0 ease-in-out ${
-                              !openItems[member._id]
-                                ? "max-h-[1000px]"
-                                : "max-h-0"
-                            }`}
-                          >
-                            {member.description.substring(0, 100)}
-                          </span>
-                          <span
-                            className={`block overflow-hidden ${
+                            className={`block overflow-hidden text-sm md:text-base ${
                               openItems[member._id]
                                 ? "transition-all duration-1000 ease-in-out max-h-[1000px]"
-                                : "max-h-0 transition-all duration-0 ease-in-out"
+                                : "max-h-0 transition-all duration-0 ease-in-out text-sm md:text-base"
                             }`}
                           >
                             {member.description}

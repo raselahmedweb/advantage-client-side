@@ -2,7 +2,6 @@
 import Container from "@/components/pages/container";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import partner1 from "@/components/images/innovensky-dark.svg";
 import IconLeft from "@/components/icons/icon-left";
 import IconRight from "@/components/icons/icon-right";
 import apiReq from "../api/axios";
@@ -89,7 +88,7 @@ export default function Partners() {
       <div className="flex-row space-y-5 bg-white rounded-xl shadow py-5 md:p-5">
         <div>
           <div className="mb-5">
-            <h3 className="text-3xl font-bold text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-center">
               Partnership with Cex & Project
             </h3>
             <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
@@ -149,7 +148,7 @@ export default function Partners() {
 
         <div>
           <div className="mb-5">
-            <h3 className="text-3xl font-bold text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-center">
               Partnership with Kols & Calls
             </h3>
             <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>

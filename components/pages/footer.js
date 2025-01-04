@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="relative lg:w-10/12 m-auto mt-4 md:mt-10 px-4 md:px-8 lg:px-20">
       <div className="bg-black text-white shadow-xl p-5 rounded-xl">
-        <div className="mx-auto text-center lg:text-start md:container flex flex-wrap justify-center md:justify-between">
+        <div className="mx-auto text-start md:container flex flex-wrap justify-center md:justify-between">
           <div className="w-full md:w-1/2 xl:w-6/12 md:pe-5">
             <div className="w-full mb-5">
               <h3 className="mb-3 lg:mb-6 text-2xl font-bold inline-block max-w-full">
@@ -17,7 +17,7 @@ export default function Footer() {
                 Fundraising, Tier-1 CEX Listings, and Influential Marketing via
                 Tier 1 Kols and Calls community
               </p>
-              <p className="flex items-center justify-center lg:justify-start text-sm font-medium text-dark">
+              <p className="flex items-center justify-start text-sm font-medium text-dark">
                 <span className="mr-3 text-primary">
                   <svg
                     width="20"
@@ -51,94 +51,12 @@ export default function Footer() {
               </p>
             </div>
           </div>
-          {/* <div className="w-full md:w-1/2 xl:w-3/12">
-            <div className="w-full mb-5">
-              <h4 className="text-2xl font-semibold text-dark mb-3 lg:mb-6">
-                Resources
-              </h4>
-              <ul className="space-y-1 lg:space-y-3">
-                <li>
-                  <a
-                    href="#"
-                    className="inline-block text-base leading-loose text-body-color hover:text-primary"
-                  >
-                    SaaS Development
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="inline-block text-base leading-loose text-body-color hover:text-primary"
-                  >
-                    Our Products
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="inline-block text-base leading-loose text-body-color hover:text-primary"
-                  >
-                    User Flow
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="inline-block text-base leading-loose text-body-color hover:text-primary"
-                  >
-                    User Strategy
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 xl:w-3/12">
-            <div className="w-full mb-5">
-              <h4 className="text-2xl font-semibold text-dark mb-3 lg:mb-6">
-                Company
-              </h4>
-              <ul className="space-y-1 lg:space-y-3">
-                <li>
-                  <a
-                    href="#"
-                    className="inline-block text-base leading-loose text-body-color hover:text-primary"
-                  >
-                    About TailGrids
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="inline-block text-base leading-loose text-body-color hover:text-primary"
-                  >
-                    Contact & Support
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="inline-block text-base leading-loose text-body-color hover:text-primary"
-                  >
-                    Success History
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="inline-block text-base leading-loose text-body-color hover:text-primary"
-                  >
-                    Setting & Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div> */}
           <div className="w-full md:w-1/2 xl:w-3/12">
             <div className="w-full mb-5">
               <h4 className="text-2xl font-semibold text-dark  mb-3 lg:mb-6">
                 Follow Us On
               </h4>
-              <div className="flex items-center justify-center lg:justify-start mb-6">
+              <div className="flex items-center justify-start mb-6">
                 <a
                   href="https://telegram.com/"
                   target="_blank"
