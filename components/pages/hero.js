@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import AnimatedButton from "../button/movingbutton";
-
 export default function Hero() {
   return (
     <section className="lg:w-10/12 m-auto px-4 md:px-8 lg:px-20 mt-5 md:pt-16 xl:pt-20 h-screen text-white">

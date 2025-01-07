@@ -1,5 +1,3 @@
-
-
 export default function HeroBg() {
   return (
     <div className="flex items-center justify-center h-screen bg-hero-bg absolute top-0 w-full -z-10">

@@ -26,7 +26,6 @@ const AuthProvider = ({ children }) => {
         method: "get",
       })
         .then((res) => {
-          console.log(res);
           if (res?.data?.otp_var == false && res?.data?.register == true) {
             setOtpVarRequired(true);
           }

@@ -1,7 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/headers/header";
-import DropDownMenu from "@/components/headers/dropdownmeno";
 import AuthProvider from "@/components/auth/authprovider";
 import InnerLayout from "@/components/innerLayout/inner-layout";
 

@@ -2,11 +2,6 @@
 import { useEffect, useState } from "react";
 import Container from "@/components/pages/container";
 import Image from "next/image";
-
-//media
-
-import p1 from "@/components/images/team1-cover.png";
-import p2 from "@/components/images/team1-profile.png";
 import apiReq from "../api/axios";
 
 export default function Team() {

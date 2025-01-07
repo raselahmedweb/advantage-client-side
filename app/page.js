@@ -6,7 +6,7 @@ import HeroBg from "@/components/pages/hero-bg";
 import Partners from "@/components/pages/partners";
 import Team from "@/components/pages/team";
 import VarifiedScout from "@/components/pages/varified-scout";
-import Image from "next/image";
+
 
 export default function Home() {
   return (
