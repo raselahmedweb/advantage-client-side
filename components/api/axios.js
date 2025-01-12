@@ -3,7 +3,7 @@ import axios from "axios";
 
 const apiReq = async ({ endPoint, method, data, CT }) => {
     return await axios({
-      url: `http://localhost:4000/${endPoint}`,
+      url: `https://advantage-server-side.onrender.com/${endPoint}`,
       method: method,
       data: data,
       headers: {
