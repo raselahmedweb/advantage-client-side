@@ -50,7 +50,7 @@ export default function Team() {
                     <div className="relative overflow-hidden w-full h-32 sm:h-40 md:h-64">
                       <Image
                         className="object-cover"
-                        src={`http://localhost:4000/photos/team/${member.photo}`}
+                        src={`https://advantage-server-side.onrender.com/photos/team/${member.photo}`}
                         alt="Profile"
                         layout="fill"
                       />

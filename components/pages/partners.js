@@ -116,7 +116,7 @@ export default function Partners() {
                   >
                     <div className="p-1 md:p-3">
                       <Image
-                        src={`http://localhost:4000/photos/partner/${partner.photo}`}
+                        src={`https://advantage-server-side.onrender.com/photos/partner/${partner.photo}`}
                         alt="partner image"
                         width={0}
                         height={0}
@@ -176,7 +176,7 @@ export default function Partners() {
                   >
                     <div className="p-1 md:p-3">
                       <Image
-                        src={`http://localhost:4000/photos/partner/${partner.photo}`}
+                        src={`https://advantage-server-side.onrender.com/photos/partner/${partner.photo}`}
                         alt="partner image"
                         width={0}
                         height={0}
