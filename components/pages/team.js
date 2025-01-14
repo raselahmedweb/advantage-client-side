@@ -49,11 +49,13 @@ export default function Team() {
                   <div className="rounded shadow-lg z-50">
                     <div className="relative overflow-hidden w-full h-32 sm:h-40 md:h-64">
                       <Image
-                        className="object-cover"
-                        src={`https://advantage-server-side.onrender.com/photos/team/${member.photo}`}
-                        alt="Profile"
-                        layout="fill"
+                      className="object-cover"
+                      src={`https://advantage-server-side.onrender.com/photos/team/${member.photo}`}
+                      alt="Profile"
+                      fill // Use this instead of layout="fill"
+                      style={{ objectFit: "cover" }}
                       />
+
                     </div>
 
                     <div className="pt-3">
