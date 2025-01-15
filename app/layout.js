@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html className="scroll-smooth" lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-black text-start`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-black antialiased text-white text-start`}
       >
         <AuthProvider>
         <InnerLayout>{children}</InnerLayout>

@@ -4,9 +4,12 @@ import {  usePathname } from "next/navigation";
 import Link from "next/link";
 
 //media
+import logo from "@/public/logo.png"
+
 import IconToggler2 from "../icons/IconToggler2";
 import { useAuth } from "../auth/authprovider";
 import IconClose from "../icons/icon-close";
+import Image from "next/image";
 
 export default function TopHeader() {
   const {dropMenu,setDropMenu} = useAuth();
@@ -24,12 +27,11 @@ export default function TopHeader() {
     <header
       className="absolute top-0 w-full z-50 transition-transform duration-300 ease-in-out"
     >
-      <nav className="bg-customBg1 border-gray-200 px-4 md:px-8 lg:px-20 py-6">
-        <div className="flex flex-wrap justify-between items-center lg:w-10/12 m-auto">
-          <div className="flex justify-start items-center lg:w-3/12">
+      <nav className="bg-black text-white border-gray-200 m-auto px-2 md:px-10 py-6">
+        <div className="flex flex-wrap justify-between items-center m-auto">
+          <div className="flex justify-start items-center">
             <Link href="/" className="flex">
-              {/* <Image src={logo} className="w-32" alt="FlowBite Logo" /> */}
-              <span className="font-bold">LOGO</span>
+              <Image src={logo} className="w-32" alt="FlowBite Logo" />
             </Link>
           </div>
           <div className="hidden md:inline w-6/12">

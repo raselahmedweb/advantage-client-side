@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 //media
+import logo from "@/public/logo.png"
+
 import IconToggler2 from "../icons/IconToggler2";
 import { useAuth } from "../auth/authprovider";
 import IconClose from "../icons/icon-close";
+import Image from "next/image";
 
 export default function Header() {
   const { dropMenu, setDropMenu } = useAuth();
@@ -40,12 +43,12 @@ export default function Header() {
         showHeader ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <nav className="bg-customBg1 border-gray-200 m-auto px-2 md:px-10 py-6">
+      <nav className="bg-black text-white border-gray-200 m-auto px-2 md:px-10 py-6">
         <div className="flex flex-wrap justify-between items-center m-auto">
           <div className="flex justify-start items-center lg:w-3/12">
             <Link href="/" className="flex">
-              {/* <Image src={logo} className="w-32" alt="FlowBite Logo" /> */}
-              <span className="font-bold">LOGO</span>
+              <Image src={logo} className="w-32" alt="FlowBite Logo" />
+            
             </Link>
           </div>
           <div className="hidden md:inline">
@@ -54,7 +57,7 @@ export default function Header() {
               onClick={() => setPath("")}
                 className={`${
                   path === ""
-                    ? "flex justify-center items-center font-bold"
+                    ? "flex text-red-600 justify-center items-center font-bold"
                     : ""
                 }`}
               >
@@ -69,7 +72,7 @@ export default function Header() {
                 onClick={() => setPath("about")}
                 className={`${
                   path === "about"
-                    ? "flex justify-center items-center font-bold"
+                    ? "flex text-red-600 justify-center items-center font-bold"
                     : ""
                 }`}
               >
@@ -79,7 +82,7 @@ export default function Header() {
               onClick={() => setPath("team")}
                 className={`${
                   path === "team"
-                    ? "flex justify-center items-center font-bold"
+                    ? "flex text-red-600 justify-center items-center font-bold"
                     : ""
                 }`}
               >
@@ -88,7 +91,7 @@ export default function Header() {
               <li onClick={() => setPath("partner")}
                 className={`${
                   path === "partner"
-                    ? "flex justify-center items-center font-bold"
+                    ? "flex text-red-600 justify-center items-center font-bold"
                     : ""
                 }`}>
                 <Link href="#partner">Partnership</Link>
@@ -96,7 +99,7 @@ export default function Header() {
               <li onClick={() => setPath("scout")}
                 className={`${
                   path === "scout"
-                    ? "flex justify-center items-center font-bold"
+                    ? "flex text-red-600 justify-center items-center font-bold"
                     : ""
                 }`}>
                 <Link href="#varifiedScout">Scout verification</Link>
@@ -104,7 +107,7 @@ export default function Header() {
               <li onClick={() => setPath("contact")}
                 className={`${
                   path === "contact"
-                    ? "flex justify-center items-center font-bold"
+                    ? "flex text-red-600 justify-center items-center font-bold"
                     : ""
                 }`}>
                 <Link href="#contact">Contact</Link>

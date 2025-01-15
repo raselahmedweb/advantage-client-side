@@ -2,7 +2,7 @@ import React from 'react'
 
 const IconToggler2 = () => {
   return (
-    <div className='w-6 inline-block text-black'>
+    <div className='w-6 inline-block text-white'>
         
         <svg
                   className="fill-current"

@@ -8,8 +8,8 @@ export default function DropDownMenu() {
     const [path, setPath] = useState("");
   
   return (
-    <div className="z-60">
-      <ul className="flex-row justify-end items-center space-y-8">
+    <div className="z-50">
+      <ul className="flex-row justify-end pt-4 items-center space-y-8">
         
         <li
           onClick={() => {
@@ -17,7 +17,7 @@ export default function DropDownMenu() {
             setDropMenu((p) => !p);
           }}
           className={`${
-            path === "" ? "flex justify-center items-center font-bold" : ""
+            path === "" ? "flex text-red-600 items-center font-bold" : ""
           }`}
         >
           <Link href="/">
@@ -30,7 +30,7 @@ export default function DropDownMenu() {
             setDropMenu((p)=>!p);
           }}
           className={`${
-            path === "about" ? "flex justify-center items-center font-bold" : ""
+            path === "about" ? "flex text-red-600 items-center font-bold" : ""
           }`}
         >
           <Link href="#about">About</Link>
@@ -41,7 +41,7 @@ export default function DropDownMenu() {
             setDropMenu((p)=>!p);
           }}
           className={`${
-            path === "team" ? "flex justify-center items-center font-bold" : ""
+            path === "team" ? "flex text-red-600 items-center font-bold" : ""
           }`}
         >
           <Link href="#team">Team</Link>
@@ -53,7 +53,7 @@ export default function DropDownMenu() {
           }}
           className={`${
             path === "partner"
-              ? "flex justify-center items-center font-bold"
+              ? "flex text-red-600 items-center font-bold"
               : ""
           }`}
         >
@@ -65,7 +65,7 @@ export default function DropDownMenu() {
             setDropMenu((p)=>!p);
           }}
           className={`${
-            path === "scout" ? "flex justify-center items-center font-bold" : ""
+            path === "scout" ? "flex text-red-600 items-center font-bold" : ""
           }`}
         >
           <Link href="#varifiedScout">Scout verification</Link>
@@ -77,7 +77,7 @@ export default function DropDownMenu() {
           }}
           className={`${
             path === "contact"
-              ? "flex justify-center items-center font-bold"
+              ? "flex text-red-600 items-center font-bold"
               : ""
           }`}
         >

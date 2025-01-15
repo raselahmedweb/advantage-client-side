@@ -5,14 +5,17 @@ import aboutImg from "@/components/images/about.jpg";
 
 export default function About() {
   return (
-    <Container id="about" bg="bg-blue-100">
-      <div className="flex-row md:flex justify-center md:justify-between items-stretch space-y-5 md:space-y-0 space-x-0 md:space-x-5">
-        <div className="flex flex-col justify-between rounded-xl shadow p-5 w-full md:w-1/2 bg-white">
+    <Container id="about">
+      <div className="flex-row md:flex justify-center md:justify-between space-y-5 md:space-y-0 space-x-0 md:space-x-5">
+        <div className="flex flex-col justify-between rounded-xl shadow p-5 w-full md:w-1/2 bg-blue-700 bg-opacity-10">
           <div>
-            <h1 className="text-2xl md:text-4xl font-bold mb-2">About Us</h1>
+            <h1 className="text-2xl md:text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 inline">
+            About Us
+            </h1>
           </div>
+
           <div>
-            <p className="text-black text-l md:text-lg font-semibold">
+            <p className="text-white text-l md:text-lg font-semibold">
               <b>Advantage Venture</b> is a leading crypto consulting company
               offering end-to-end solutions to drive blockchain projects from
               concept to success. We specialize in providing essential services
@@ -34,7 +37,7 @@ export default function About() {
               foundation for long-term success.
               <br />
               <br />
-              Additionally, <b>Advantage Venture</b>
+              Additionally, <b>Advantage Venture </b>
               offers Tier-1 CEX listing services to enhance projects global
               reach and liquidity. We simplify the process of listing on top
               exchanges like Binance, kucoin ,bybit providing the exposure
@@ -54,32 +57,32 @@ export default function About() {
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
             <Image
               src={aboutImg}
-              className="relative rounded-xl shadow duration-300"
+              className="relative z-10 rounded-xl shadow duration-300"
               alt="About our company"
             />
           </div>
 
-          <div className="flex flex-wrap p-5 bg-white rounded-xl shadow">
+          <div className="flex flex-wrap p-5 bg-blue-700 bg-opacity-10 rounded-xl shadow">
             <div className="w-full sm:w-1/2 text-center sm:text-start p-1">
-              <div className="bg-gray-200 rounded-xl p-3 duration-300 border-4 border-b-gray-200 hover:border-gray-400">
+              <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
                 <span className="text-3xl font-bold mb-2 block">3.5</span>
                 <span className="text-gray-500 block">years of experience</span>
               </div>
             </div>
             <div className="w-full sm:w-1/2 text-center sm:text-start p-1">
-              <div className="bg-gray-200 rounded-xl p-3 duration-300 border-4 border-b-gray-200 hover:border-gray-400">
+              <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
                 <span className="text-3xl font-bold mb-2 block">3.5</span>
                 <span className="text-gray-500 block">years of experience</span>
               </div>
             </div>
             <div className="w-full sm:w-1/2 text-center sm:text-start p-1">
-              <div className="bg-gray-200 rounded-xl p-3 duration-300 border-4 border-b-gray-200 hover:border-gray-400">
+              <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
                 <span className="text-3xl font-bold mb-2 block">3.5</span>
                 <span className="text-gray-500 block">years of experience</span>
               </div>
             </div>
             <div className="w-full sm:w-1/2 text-center sm:text-start p-1">
-              <div className="bg-gray-200 rounded-xl p-3 duration-300 border-4 border-b-gray-200 hover:border-gray-400">
+              <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
                 <span className="text-3xl font-bold mb-2 block">3.5</span>
                 <span className="text-gray-500 block">years of experience</span>
               </div>

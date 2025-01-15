@@ -28,97 +28,105 @@ export default function Team() {
   const toggleOpen = (id) => {
     setOpenItems((prevState) => ({
       ...prevState,
-      [id]: !prevState[id], // Toggle the specific item's open state
+      [id]: !prevState[id],
     }));
   };
 
-
-  const imageRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    const rect = imageRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20; // Adjust movement sensitivity
+  const handleMouseMove = (e, index) => {
+    const image = document.getElementById(`image-${index}`);
+    const rect = image.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20; // Adjust sensitivity
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-    imageRef.current.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
+    image.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
   };
 
-  const handleMouseLeave = () => {
-    imageRef.current.style.transform = "translate(0, 0) scale(1)";
+  const handleMouseLeave = (index) => {
+    const image = document.getElementById(`image-${index}`);
+    image.style.transform = "translate(0, 0) scale(1)";
   };
 
   return (
-    <Container id="team" bg="bg-gray-600">
-      <div className="flex-row space-y-5 bg-black text-white rounded-xl shadow p-5">
-        <div className="m-auto">
-          <h2 className="text-xl md:text-3xl font-bold md:text-center">Advantage Team</h2>
-          <div className="mt-3 border-t border-2 border-yellow-400 mx-0 md:mx-auto w-24"></div>
+    <Container id="team">
+      <div className="flex-row space-y-5 bg-green-700 bg-opacity-10 text-white rounded-xl shadow p-5">
+        <div>
+          <div className="flex justify-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 inline-block">
+              Advantage Team
+            </h3>
+            
+          </div>
+          <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
+          
         </div>
         <div className="flex flex-wrap justify-center md:justify-start">
           {teamMember ? (
-            teamMember.map((member, index) => {
-              return (
-                <div
-                  key={index}
-                  className="pe-2 text-start md:pe-5 mb-5 w-1/2 xl:w-1/3 2xl:w-1/4"
-                >
-                  <div className="rounded shadow-lg z-50">
-                    <div
-                    onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseLeave}
-                     className="relative overflow-hidden w-full h-32 sm:h-40 md:h-64">
-                      <Image
-                      className="object-cover"
+            teamMember.map((member, index) => (
+              <div
+                key={index}
+                className="pe-2 text-start md:pe-5 mb-5 w-full sm:w-2/3 md:w-1/2 xl:w-1/3 2xl:w-1/4"
+              >
+                <div className="rounded shadow-lg z-50">
+                  <div
+                    id={`image-container-${index}`}
+                    onMouseMove={(e) => handleMouseMove(e, index)}
+                    onMouseLeave={() => handleMouseLeave(index)}
+                    className="relative overflow-hidden w-full h-32 sm:h-40 md:h-64"
+                  >
+                    <Image
+                      id={`image-${index}`}
+                      className="object-cover transition-transform duration-300 ease-out"
                       src={`https://advantage-server-side.onrender.com/photos/team/${member.photo}`}
                       alt="Profile"
-                      fill // Use this instead of layout="fill"
+                      fill
                       style={{ objectFit: "cover" }}
-                      />
+                      loading="lazy"
+                    />
+                  </div>
 
-                    </div>
-
-                    <div className="pt-3">
-                      <div className="space-y-1">
-                        <h2 className="text-md md:text-2xl font-bold text-green-500">
-                          {member.name}
-                        </h2>
-                        <p className="text-gray-400 text-sm md:text-lg">{member.title}</p>
-                        <p>
+                  <div className="pt-3">
+                    <div className="space-y-1">
+                      <h2 className="text-md md:text-2xl font-bold text-green-500">
+                        {member.name}
+                      </h2>
+                      <p className="text-gray-400 text-sm md:text-lg">
+                        {member.title}
+                      </p>
+                      <p>
                         <span
-  className={`text-sm md:text-base block overflow-hidden transition-all duration-0 ease-in-out ${
-    !openItems[member._id] ? "max-h-[1000px]" : "max-h-0"
-  }`}
->
-  {openItems[member._id]
-    ? member.description // Show full content if the item is open
-    : (typeof window !== "undefined" && window.innerWidth < 768)
-    ? member.description.substring(0, 50)
-    : member.description.substring(0, 100)}
-</span>
-
-                          <span
-                            className={`block overflow-hidden text-sm md:text-base ${
-                              openItems[member._id]
-                                ? "transition-all duration-1000 ease-in-out max-h-[1000px]"
-                                : "max-h-0 transition-all duration-0 ease-in-out text-sm md:text-base"
-                            }`}
-                          >
-                            {member.description}
-                          </span>{" "}
-                          <button
-                            onClick={() => toggleOpen(member._id)}
-                            className="text-green-500"
-                          >
-                            {openItems[member._id]
-                              ? "show less"
-                              : "read more..."}
-                          </button>
-                        </p>
-                      </div>
+                          className={`text-sm md:text-base block overflow-hidden transition-all duration-0 ease-in-out ${
+                            !openItems[member._id]
+                              ? "max-h-[1000px]"
+                              : "max-h-0"
+                          }`}
+                        >
+                          {openItems[member._id]
+                            ? member.description
+                            : typeof window !== "undefined" &&
+                              window.innerWidth < 768
+                            ? member.description.substring(0, 50)
+                            : member.description.substring(0, 100)}
+                        </span>
+                        <span
+                          className={`block overflow-hidden text-sm md:text-base ${
+                            openItems[member._id]
+                              ? "transition-all duration-1000 ease-in-out max-h-[1000px]"
+                              : "max-h-0 transition-all duration-0 ease-in-out text-sm md:text-base"
+                          }`}
+                        >
+                          {member.description}
+                        </span>{" "}
+                        <button
+                          onClick={() => toggleOpen(member._id)}
+                          className="text-green-500"
+                        >
+                          {openItems[member._id] ? "show less" : "read more..."}
+                        </button>
+                      </p>
                     </div>
                   </div>
                 </div>
-              );
-            })
+              </div>
+            ))
           ) : (
             <div>
               <h1>Team members loading...</h1>

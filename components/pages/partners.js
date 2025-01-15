@@ -1,208 +1,165 @@
 "use client";
 import Container from "@/components/pages/container";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import IconLeft from "@/components/icons/icon-left";
-import IconRight from "@/components/icons/icon-right";
+import { useEffect, useState, useRef } from "react";
 import apiReq from "../api/axios";
 
 export default function Partners() {
-  const [isLoading, setIsLoading] = useState(false);
   const [CexProjectPartners, setCexProjectPartners] = useState([]);
   const [KolsCallsPartners, setKolsCallsPartners] = useState([]);
-  const [totalPartnersCex, setTotalPartnersCex] = useState(0);
-  const [totalPartnersKols, setTotalPartnersKols] = useState(0);
+  const cexSliderRef = useRef(null);
+  const kolsSliderRef = useRef(null);
+  const isCexHovered = useRef(false);
+  const isKolsHovered = useRef(false);
 
-  // Pagination states for both APIs
-  const [CexProjectPartnersPage, setCexProjectPartnersPage] = useState(1);
-  const [KolsCallsPartnersPage, setKolsCallsPartnersPage] = useState(1);
-  const [size] = useState(6);
-
-  // Calculate total pages for both
-  const totalPagesCex = Math.ceil(totalPartnersCex / size);
-  const totalPagesKols = Math.ceil(totalPartnersKols / size);
-
-  // Fetch Cex & Project Partners based on page
-  const fetchCexProjectPartners = (page) => {
-    setIsLoading(true);
-    apiReq({
-      endPoint: `partners/Cex & Project/${page}`,
-      method: "get",
-    })
-      .then((res) => {
-        setCexProjectPartners(res?.data?.partners);
-        setTotalPartnersCex(res?.data?.totalPartners);
-      })
-      .catch((err) => console.log(err.message))
-      .finally(() => setIsLoading(false));
-  };
-
-  // Fetch Kols & Calls Partners based on page
-  const fetchKolsCallsPartners = (page) => {
-    setIsLoading(true);
-    apiReq({
-      endPoint: `partners/Kols & Calls/${page}`,
-      method: "get",
-    })
-      .then((res) => {
-        setKolsCallsPartners(res?.data?.partners);
-        setTotalPartnersKols(res?.data?.totalPartners);
-      })
-      .catch((err) => console.log(err.message))
-      .finally(() => setIsLoading(false));
-  };
-
-  // Fetch data for both categories when the component mounts
+  // Fetch all Cex & Project partners
   useEffect(() => {
-    fetchCexProjectPartners(CexProjectPartnersPage);
-    fetchKolsCallsPartners(KolsCallsPartnersPage);
-  }, [CexProjectPartnersPage, KolsCallsPartnersPage]);
+    apiReq({
+      endPoint: `partners/Cex & Project`,
+      method: "get",
+    })
+      .then((res) => {
+        const partners = res?.data?.partners || [];
+        setCexProjectPartners([...partners, ...partners]); // Duplicate for infinite scroll
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
 
-  // Handlers for Previous and Next buttons
-  const handlePrevClick = (type) => {
-    if (type === "Cex") {
-      if (CexProjectPartnersPage > 1) {
-        setCexProjectPartnersPage(CexProjectPartnersPage - 1); // Decrease Cex page
-      }
-    } else if (type === "Kols") {
-      if (KolsCallsPartnersPage > 1) {
-        setKolsCallsPartnersPage(KolsCallsPartnersPage - 1); // Decrease Kols page
-      }
-    }
-  };
+  // Fetch all Kols & Calls partners
+  useEffect(() => {
+    apiReq({
+      endPoint: `partners/Kols & Calls`,
+      method: "get",
+    })
+      .then((res) => {
+        const partners = res?.data?.partners || [];
+        setKolsCallsPartners([...partners, ...partners]); // Duplicate for infinite scroll
+      })
+      .catch((err) => console.log(err.message));
+  }, []);
 
-  const handleNextClick = (type) => {
-    if (type === "Cex") {
-      if (CexProjectPartnersPage < totalPagesCex) {
-        setCexProjectPartnersPage(CexProjectPartnersPage + 1); // Increase Cex page
-      }
-    } else if (type === "Kols") {
-      if (KolsCallsPartnersPage < totalPagesKols) {
-        setKolsCallsPartnersPage(KolsCallsPartnersPage + 1); // Increase Kols page
-      }
-    }
-  };
+  useEffect(() => {
+    const scrollContent = (slider, isHovered, direction) => {
+      let animationId;
+      let scrollAmount = 0;
+
+      const scroll = () => {
+        if (!isHovered.current) {
+          scrollAmount += direction * 1.5; // Adjust speed here
+          if (scrollAmount >= slider.scrollWidth / 2) scrollAmount = 0; // Reset for infinite loop
+          if (scrollAmount < 0) scrollAmount = slider.scrollWidth / 2; // Reset for reverse loop
+          slider.scrollLeft = scrollAmount;
+        }
+        animationId = requestAnimationFrame(scroll);
+      };
+
+      const handleMouseEnter = () => (isHovered.current = true);
+      const handleMouseLeave = () => (isHovered.current = false);
+
+      scroll();
+      slider.addEventListener("mouseenter", handleMouseEnter);
+      slider.addEventListener("mouseleave", handleMouseLeave);
+
+      return () => {
+        cancelAnimationFrame(animationId);
+        slider.removeEventListener("mouseenter", handleMouseEnter);
+        slider.removeEventListener("mouseleave", handleMouseLeave);
+      };
+    };
+
+    const cexCleanup = scrollContent(cexSliderRef.current, isCexHovered, 1); // Scroll left
+    const kolsCleanup = scrollContent(kolsSliderRef.current, isKolsHovered, -1); // Scroll right
+
+    return () => {
+      cexCleanup();
+      kolsCleanup();
+    };
+  }, [CexProjectPartners, KolsCallsPartners]);
 
   return (
     <Container id="partner">
-      <div className="flex-row space-y-5 bg-white rounded-xl shadow py-5 md:p-5">
+      <div className="flex-row space-y-16 bg-gray-500 bg-opacity-25 rounded-xl shadow py-5 md:p-5">
+        {/* Cex & Project Partners */}
         <div>
-          <div className="mb-5">
-            <h3 className="text-2xl md:text-3xl font-bold text-center">
+          <div className="flex justify-center">
+            <h3 className="text-2xl md:text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 inline-block">
               Partnership with Cex & Project
             </h3>
-            <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
           </div>
-          <div className="flex justify-between items-center space-x-2">
-            <div className="sliderBtn">
-              <button
-                className={`nextBtn flex justify-center items-center ${
-                  CexProjectPartnersPage === 1
-                    ? "cursor-not-allowed opacity-50" // Disabled button style
-                    : "cursor-pointer transition-all" // Normal button style
-                }`}
-                onClick={() => handlePrevClick("Cex")}
-                disabled={CexProjectPartnersPage === 1} // Disable if on first page
-              >
-                <IconLeft />
-              </button>
-            </div>
-            <div className="flex flex-wrap justify-center">
-              {CexProjectPartners.length ? (
-                CexProjectPartners.map((partner, index) => (
-                  <div
-                    key={index}
-                    className="w-1/3 flex justify-center items-center md:w-1/6 lg:w-1/6 max-h-16 sm:max-h-20 md:max-h-24 lg:max-h-28 overflow-hidden border"
-                  >
-                    <div className="p-1 md:p-3">
-                      <Image
-                        src={`https://advantage-server-side.onrender.com/photos/partner/${partner.photo}`}
-                        alt="partner image"
-                        width={0}
-                        height={0}
-                        layout="responsive"
-                        objectFit="contain"
-                      />
-                    </div>
+
+          <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
+          <div
+            ref={cexSliderRef}
+            className="flex items-center justify-center space-x-5 mt-5 md:mt-10 overflow-x-scroll no-scrollbar"
+            style={{
+              whiteSpace: "nowrap",
+              scrollbarWidth: "none", // Hide scrollbar in Firefox
+              msOverflowStyle: "none", // Hide scrollbar in IE 10+
+            }}
+          >
+            {CexProjectPartners.length ? (
+              CexProjectPartners.map((partner, index) => (
+                <div
+                  key={index}
+                  className="flex justify-center items-center lg:w-1/6 w-2/6 flex-shrink-0 max-h-28 overflow-hidden bg-white"
+                >
+                  <div className="p-2">
+                    <Image
+                      src={`https://advantage-server-side.onrender.com/photos/partner/${partner.photo}`}
+                      alt="partner image"
+                      width={100}
+                      height={100}
+                      layout="responsive"
+                      objectFit="contain"
+                    />
                   </div>
-                ))
-              ) : (
-                <div>No partners found</div>
-              )}
-            </div>
-            <div className="sliderBtn">
-              <button
-               className={`nextBtn flex justify-center items-center ${
-                CexProjectPartnersPage === totalPagesCex
-                  ? "cursor-not-allowed opacity-50" // Disabled button style
-                  : "cursor-pointer transition-all" // Normal button style
-              }`}
-                onClick={() => handleNextClick("Cex")}
-                disabled={CexProjectPartnersPage === totalPagesCex} // Disable if on last page
-              >
-                <IconRight />
-              </button>
-            </div>
+                </div>
+              ))
+            ) : (
+              <div>No partners found</div>
+            )}
           </div>
         </div>
 
+        {/* Kols & Calls Partners */}
         <div>
-          <div className="mb-5">
-            <h3 className="text-2xl md:text-3xl font-bold text-center">
-              Partnership with Kols & Calls
+        <div className="flex justify-center">
+            <h3 className="text-2xl md:text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 inline-block">
+            Partnership with Kols & Calls
             </h3>
-            <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
           </div>
-          <div className="flex justify-between items-center space-x-2">
-            <div className="sliderBtn">
-              <button
-                className={`nextBtn flex justify-center items-center ${
-                  KolsCallsPartnersPage  === 1
-                    ? "cursor-not-allowed opacity-50" // Disabled button style
-                    : "cursor-pointer transition-all" // Normal button style
-                }`}
-                onClick={() => handlePrevClick("Kols")}
-                disabled={KolsCallsPartnersPage === 1} // Disable if on first page
-              >
-                <IconLeft />
-              </button>
-            </div>
-            <div className="flex flex-wrap justify-center">
-              {KolsCallsPartners.length ? (
-                KolsCallsPartners.map((partner, index) => (
-                  <div
-                    key={index}
-                    className="w-1/3 flex justify-center items-center md:w-1/6 lg:w-1/6 max-h-16 sm:max-h-20 md:max-h-24 lg:max-h-28 overflow-hidden border"
-                  >
-                    <div className="p-1 md:p-3">
-                      <Image
-                        src={`https://advantage-server-side.onrender.com/photos/partner/${partner.photo}`}
-                        alt="partner image"
-                        width={0}
-                        height={0}
-                        layout="responsive"
-                        objectFit="contain"
-                      />
-                    </div>
+          
+          <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
+          <div
+            ref={kolsSliderRef}
+            className="flex items-center justify-center mt-5 md:mt-10 space-x-5 overflow-x-scroll no-scrollbar"
+            style={{
+              whiteSpace: "nowrap",
+              scrollbarWidth: "none", // Hide scrollbar in Firefox
+              msOverflowStyle: "none", // Hide scrollbar in IE 10+
+            }}
+          >
+            {KolsCallsPartners.length ? (
+              KolsCallsPartners.map((partner, index) => (
+                <div
+                  key={index}
+                  className="flex justify-center items-center lg:w-1/6 w-2/6 flex-shrink-0 max-h-28 overflow-hidden bg-white"
+                >
+                  <div className="p-2">
+                    <Image
+                      src={`https://advantage-server-side.onrender.com/photos/partner/${partner.photo}`}
+                      alt="partner image"
+                      width={100}
+                      height={100}
+                      layout="responsive"
+                      objectFit="contain"
+                    />
                   </div>
-                ))
-              ) : (
-                <div>No partners found</div>
-              )}
-            </div>
-            <div className="sliderBtn">
-              <button
-                className={`nextBtn flex justify-center items-center ${
-                  KolsCallsPartnersPage === totalPagesKols
-                    ? "cursor-not-allowed opacity-50" // Disabled button style
-                    : "cursor-pointer transition-all" // Normal button style
-                }`}
-                onClick={() => handleNextClick("Kols")}
-                disabled={KolsCallsPartnersPage === totalPagesKols} // Disable if on last page
-              >
-                <IconRight />
-              </button>
-            </div>
+                </div>
+              ))
+            ) : (
+              <div>No partners found</div>
+            )}
           </div>
         </div>
       </div>
