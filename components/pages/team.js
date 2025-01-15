@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "@/components/pages/container";
 import Image from "next/image";
 import apiReq from "../api/axios";
@@ -31,8 +31,23 @@ export default function Team() {
       [id]: !prevState[id], // Toggle the specific item's open state
     }));
   };
+
+
+  const imageRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const rect = imageRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20; // Adjust movement sensitivity
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+    imageRef.current.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
+  };
+
+  const handleMouseLeave = () => {
+    imageRef.current.style.transform = "translate(0, 0) scale(1)";
+  };
+
   return (
-    <Container id="team">
+    <Container id="team" bg="bg-gray-600">
       <div className="flex-row space-y-5 bg-black text-white rounded-xl shadow p-5">
         <div className="m-auto">
           <h2 className="text-xl md:text-3xl font-bold md:text-center">Advantage Team</h2>
@@ -47,7 +62,10 @@ export default function Team() {
                   className="pe-2 text-start md:pe-5 mb-5 w-1/2 xl:w-1/3 2xl:w-1/4"
                 >
                   <div className="rounded shadow-lg z-50">
-                    <div className="relative overflow-hidden w-full h-32 sm:h-40 md:h-64">
+                    <div
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                     className="relative overflow-hidden w-full h-32 sm:h-40 md:h-64">
                       <Image
                       className="object-cover"
                       src={`https://advantage-server-side.onrender.com/photos/team/${member.photo}`}

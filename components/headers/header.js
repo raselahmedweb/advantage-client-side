@@ -40,8 +40,8 @@ export default function Header() {
         showHeader ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <nav className="bg-customBg1 border-gray-200 px-4 md:px-8 lg:px-20 py-6">
-        <div className="flex flex-wrap justify-between items-center lg:w-10/12 m-auto">
+      <nav className="bg-customBg1 border-gray-200 m-auto px-2 md:px-10 py-6">
+        <div className="flex flex-wrap justify-between items-center m-auto">
           <div className="flex justify-start items-center lg:w-3/12">
             <Link href="/" className="flex">
               {/* <Image src={logo} className="w-32" alt="FlowBite Logo" /> */}
