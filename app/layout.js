@@ -16,14 +16,17 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Advantage Venture supports projects for Strategic Fundraising, Tier-1 CEX Listings, and Influential Marketing via Tier 1 Kols and Calls community",
   description: "Advantage Venture supports projects for Strategic Fundraising, Tier-1 CEX Listings, and Influential Marketing via Tier 1 Kols and Calls community",
+  keywords: ["advantage venture", "strategic fundraising", "tier-1 cex listings", "influential marketing", "tier 1 kols and calls community"],
+  icons: {
+    icon: "/fav-icon.ico",
+    apple: "/logo.png"
+  }
 };
 
 export default function RootLayout({ children }) {
   return (
     <html className="scroll-smooth" lang="en">
-      <head>
-        <link rel="icon" href="/fav-icon.ico" />
-      </head>
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-black antialiased text-white text-start`}
       >
