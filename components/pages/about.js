@@ -53,7 +53,7 @@ export default function About() {
           </div>
         </div>
         <div className="flex-row space-y-5 w-full md:w-1/2">
-          <div className="relative group p-1 duration-300">
+          <div className="relative group p-1 duration-300 -z-50">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
             <Image
               src={aboutImg}

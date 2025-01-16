@@ -1,12 +1,15 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "@/components/pages/container";
 import Image from "next/image";
 import apiReq from "../api/axios";
+import { useAuth } from "../auth/authprovider";
 
 export default function Team() {
+  const {dropMenu} = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [teamMember, setTeamMember] = useState([]);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setIsLoading(true);
@@ -35,14 +38,14 @@ export default function Team() {
   const handleMouseMove = (e, index) => {
     const image = document.getElementById(`image-${index}`);
     const rect = image.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20; // Adjust sensitivity
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-    image.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
+    const x = (e.clientX - rect.left - rect.width / 2) / 15; // Adjust sensitivity
+    const y = (e.clientY - rect.top - rect.height / 2) / 15;
+    image.style.transform = `rotateX(${-y}deg) rotateY(${x}deg) scale(1.1)`;
   };
 
   const handleMouseLeave = (index) => {
     const image = document.getElementById(`image-${index}`);
-    image.style.transform = "translate(0, 0) scale(1)";
+    image.style.transform = "rotateX(0) rotateY(0) scale(1)";
   };
 
   return (
@@ -53,10 +56,8 @@ export default function Team() {
             <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 inline-block">
               Advantage Team
             </h3>
-            
           </div>
           <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
-          
         </div>
         <div className="flex flex-wrap justify-center md:justify-start">
           {teamMember ? (
@@ -65,16 +66,16 @@ export default function Team() {
                 key={index}
                 className="pe-2 text-start md:pe-5 mb-5 w-full sm:w-2/3 md:w-1/2 xl:w-1/3 2xl:w-1/4"
               >
-                <div className="rounded shadow-lg z-50">
+                <div className="rounded shadow-lg">
                   <div
                     id={`image-container-${index}`}
                     onMouseMove={(e) => handleMouseMove(e, index)}
                     onMouseLeave={() => handleMouseLeave(index)}
-                    className="relative overflow-hidden w-full h-32 sm:h-40 md:h-64"
+                    className={`relative overflow-hidden w-full h-32 sm:h-40 md:h-64 ${dropMenu&&"-z-50"} `}
                   >
                     <Image
                       id={`image-${index}`}
-                      className="object-cover transition-transform duration-300 ease-out"
+                      className="object-cover transition-transform duration-500 ease-out"
                       src={`https://advantage-server-side.onrender.com/photos/team/${member.photo}`}
                       alt="Profile"
                       fill

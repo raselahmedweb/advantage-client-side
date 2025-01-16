@@ -12,7 +12,7 @@ import IconClose from "../icons/icon-close";
 import Image from "next/image";
 
 export default function Header() {
-  const { dropMenu, setDropMenu } = useAuth();
+  const { setDropMenu } = useAuth();
 
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -118,15 +118,11 @@ export default function Header() {
             onClick={() => setDropMenu((prev) => !prev)}
             className="md:hidden w-6"
           >
-            {!dropMenu ? (
+           
               <span className="w-full">
                 <IconToggler2 />
               </span>
-            ) : (
-              <span className="min-w-full">
-                <IconClose />
-              </span>
-            )}
+            
           </button>
         </div>
       </nav>

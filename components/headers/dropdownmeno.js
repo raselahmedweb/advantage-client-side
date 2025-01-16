@@ -2,13 +2,24 @@
 import Link from "next/link";
 import { useAuth } from "@/components/auth/authprovider";
 import { useState } from "react";
+import IconClose from "../icons/icon-close";
 
 export default function DropDownMenu() {
   const { setDropMenu } = useAuth();
     const [path, setPath] = useState("");
   
   return (
-    <div className="z-50">
+    <div className="z-50 relative">
+      <button
+            onClick={() => setDropMenu((prev) => !prev)}
+            className="md:hidden w-6 absolute top-1 end-1"
+          >
+            
+              <span className="min-w-full text-red-600">
+                <IconClose />
+              </span>
+            
+          </button>
       <ul className="flex-row justify-end pt-4 items-center space-y-8">
         
         <li

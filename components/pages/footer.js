@@ -9,7 +9,7 @@ export default function Footer() {
   const message = encodeURIComponent("Hello");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
   return (
-    <footer className="relative m-auto mt-4 md:mt-10 px-2 md:px-10">
+    <footer className="relative m-auto mt-4 md:mt-10 px-2 md:px-10 -z-50">
       <div className="bg-blue-600 bg-opacity-20 text-white shadow-xl p-5 rounded-xl">
         <div className="mx-auto text-start md:container flex flex-wrap justify-start pb-5 md:justify-between">
           <div>

@@ -45,7 +45,7 @@ export default function Partners() {
 
       const scroll = () => {
         if (!isHovered.current) {
-          scrollAmount += direction * 1.5; // Adjust speed here
+          scrollAmount += direction * 0.75; // Adjust speed here (slower)
           if (scrollAmount >= slider.scrollWidth / 2) scrollAmount = 0; // Reset for infinite loop
           if (scrollAmount < 0) scrollAmount = slider.scrollWidth / 2; // Reset for reverse loop
           slider.scrollLeft = scrollAmount;
