@@ -1,16 +1,39 @@
+"use client";
 import Container from "@/components/pages/container";
 import Image from "next/image";
 
 import aboutImg from "@/components/images/about.jpg";
+import { useEffect, useState } from "react";
+import apiReq from "../api/axios";
 
 export default function About() {
+  const [infos, setInfos] = useState([]);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const fetchPartners = async () => {
+        try {
+          const res = await apiReq({
+            endPoint: "info",
+            method: "get",
+          });
+          setInfos(res?.data?.info);
+        } catch (err) {
+          console.error("Error fetching partners:", err.message);
+        }
+      };
+
+      fetchPartners();
+    }, 100);
+
+    return () => clearInterval(intervalId);
+  }, []);
   return (
     <Container id="about">
       <div className="flex-row md:flex justify-center md:justify-between space-y-5 md:space-y-0 space-x-0 md:space-x-5">
         <div className="flex flex-col justify-between rounded-xl shadow p-5 w-full md:w-1/2 bg-blue-700 bg-opacity-10">
           <div>
             <h1 className="text-2xl md:text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500 inline">
-            About Us
+              About Us
             </h1>
           </div>
 
@@ -63,30 +86,22 @@ export default function About() {
           </div>
 
           <div className="flex flex-wrap p-5 bg-blue-700 bg-opacity-10 rounded-xl shadow">
-            <div className="w-full sm:w-1/2 text-center sm:text-start p-1">
-              <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
-                <span className="text-3xl font-bold mb-2 block">3.5</span>
-                <span className="text-gray-500 block">years of experience</span>
-              </div>
-            </div>
-            <div className="w-full sm:w-1/2 text-center sm:text-start p-1">
-              <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
-                <span className="text-3xl font-bold mb-2 block">3.5</span>
-                <span className="text-gray-500 block">years of experience</span>
-              </div>
-            </div>
-            <div className="w-full sm:w-1/2 text-center sm:text-start p-1">
-              <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
-                <span className="text-3xl font-bold mb-2 block">3.5</span>
-                <span className="text-gray-500 block">years of experience</span>
-              </div>
-            </div>
-            <div className="w-full sm:w-1/2 text-center sm:text-start p-1">
-              <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
-                <span className="text-3xl font-bold mb-2 block">3.5</span>
-                <span className="text-gray-500 block">years of experience</span>
-              </div>
-            </div>
+            {infos.length &&
+              infos.map((inf, idx) => {
+                return (
+                  <div
+                    key={idx}
+                    className="w-full sm:w-1/2 text-center sm:text-start p-1"
+                  >
+                    <div className="bg-black text-white rounded-xl p-3 duration-300 border-4 border-black hover:border-red-600">
+                      <span className="text-3xl font-bold mb-2 block">
+                        {inf.infoDate}
+                      </span>
+                      <span className="text-gray-500 block">{inf.info}</span>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
