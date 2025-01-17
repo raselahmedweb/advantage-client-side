@@ -90,6 +90,14 @@ export default function TopHeader() {
                 }`}>
                 <Link href="#varifiedScout">Scout verification</Link>
               </li>
+              <li onClick={() => setPath("blog")}
+                className={`${
+                  path === "blog"
+                    ? "flex text-red-600 justify-center items-center font-bold"
+                    : ""
+                }`}>
+                <Link href="/blog">Blog</Link>
+              </li>
               <li onClick={() => setPath("contact")}
                 className={`${
                   path === "contact"

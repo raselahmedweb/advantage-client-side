@@ -83,6 +83,19 @@ export default function DropDownMenu() {
         </li>
         <li
           onClick={() => {
+            setPath("blog");
+            setDropMenu((p)=>!p);
+          }}
+          className={`${
+            path === "blog"
+              ? "flex text-red-600 items-center font-bold"
+              : ""
+          }`}
+        >
+          <Link href="/blog">Blog</Link>
+        </li>
+        <li
+          onClick={() => {
             setPath("contact");
             setDropMenu((p)=>!p);
           }}
