@@ -8,10 +8,6 @@ import apiReq from "../api/axios";
 import Link from "next/link";
 
 export default function Contact() {
-  // WhatsApp info
-  const phoneNumber = "+8615616256736";
-  const wmessage = encodeURIComponent("Hello");
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${wmessage}`;
   const [interest, setInterest] = useState("Marketing");
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
@@ -160,10 +156,10 @@ export default function Contact() {
               ></textarea>
               {statusMsg && (
                 <div
-                  className={`${
+                  className={`text-black ${
                     status
-                      ? "bg-green-100 px-2 py-2 md:px-4 md:py-3 rounded"
-                      : "bg-red-100 px-2 py-2 md:px-4 md:py-3 rounded"
+                      ? "bg-green-200 px-2 py-2 md:px-4 md:py-3 rounded"
+                      : "bg-red-200 px-2 py-2 md:px-4 md:py-3 rounded"
                   }`}
                 >
                   <span>{statusMsg}</span>

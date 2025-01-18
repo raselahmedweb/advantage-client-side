@@ -4,6 +4,7 @@ import Container from "@/components/pages/container";
 import Image from "next/image";
 import apiReq from "../api/axios";
 import { useAuth } from "../auth/authprovider";
+import TeamSkeleton from "../skeleton/team-skeleton";
 
 export default function Team() {
   const {dropMenu} = useAuth();
@@ -11,8 +12,8 @@ export default function Team() {
   const [teamMember, setTeamMember] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const intervalId = setInterval(() => {
-      setIsLoading(true);
       apiReq({
         endPoint: "team",
         method: "get",
@@ -20,12 +21,17 @@ export default function Team() {
         .then((res) => {
           setTeamMember(res?.data?.team);
         })
-        .catch((err) => console.log(err.message))
-        .finally(() => setIsLoading(false));
+        .catch((err) => {
+          console.log(err.message);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }, 1000);
-
+  
     return () => clearInterval(intervalId);
   }, []);
+  
 
   const [openItems, setOpenItems] = useState({});
   const toggleOpen = (id) => {
@@ -60,7 +66,7 @@ export default function Team() {
           <div className="mt-3 border-t border-2 border-yellow-400 mx-auto w-24"></div>
         </div>
         <div className="flex flex-wrap justify-center md:justify-start">
-          {teamMember ? (
+          {teamMember.length > 0 ? (
             teamMember.map((member, index) => (
               <div
                 key={index}
@@ -128,11 +134,11 @@ export default function Team() {
                 </div>
               </div>
             ))
-          ) : (
-            <div>
-              <h1>Team members loading...</h1>
-            </div>
-          )}
+          ) : isLoading ? (
+            <TeamSkeleton/>
+          ): <div className="mx-auto">
+          <h1 className="text-center">Team members not found</h1>
+        </div>}
         </div>
       </div>
     </Container>

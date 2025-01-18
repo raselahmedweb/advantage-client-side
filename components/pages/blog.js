@@ -6,13 +6,14 @@ import Container from "./container";
 
 import logo from "../../public/logo.png"
 import apiReq from "../api/axios";
+import BlogSkeleton from "../skeleton/blog-skeleton";
 export default function Blog() {
     const [isLoading, setIsLoading] = useState(false);
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const intervalId = setInterval(() => {
-      setIsLoading(true);
       apiReq({
         endPoint: "blog",
         method: "get",
@@ -30,7 +31,7 @@ export default function Blog() {
   return (
     <Container id="blog">
         <div className="flex-row space-y-4 w-full md:w-8/12 lg:w-1/2 mx-auto">
-            {blogs && blogs.map((blog, idx)=>{
+            {blogs.length > 0 ? blogs.map((blog, idx)=>{
                 const {name,
                     type,
                     valuation,
@@ -85,7 +86,11 @@ export default function Blog() {
                 </div>
             </div>
                 )
-            })}
+            }): isLoading ? (
+                <BlogSkeleton/>
+            ) : (
+                <div className="mx-auto"><h2 className="text-center">No Blog found</h2></div>
+            )}
         </div>
     </Container>
   )
