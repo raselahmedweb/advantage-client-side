@@ -35,7 +35,7 @@ export default function VarifiedScout() {
     }
   };
   return (
-    <Container id="varifiedScout">
+    <Container id="verifiedScout">
       <div className="flex-row space-y-5 bg-gray-700 bg-opacity-35 rounded-xl shadow p-5 md:p-5">
         <div className="mb-5 text-center">
         <div className="flex justify-center">

@@ -4,19 +4,19 @@ import Header from "@/components/headers/header";
 import { useAuth } from "@/components/auth/authprovider";
 import { useEffect, useState } from "react";
 import ObserverApiInstance from "../intersec_activity/ObserverApiInstance";
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 export default function InnerLayout({ children }) {
   const { dropMenu } = useAuth();
-  const trackPath = useSearchParams();
   const [isMounted, setIsMounted] = useState(false);
+  const params = useParams();
   useEffect(() => {
     if (isMounted) {
       ObserverApiInstance();
     } else {
       setIsMounted(true);
     }
-  }, [isMounted, trackPath]);
+  }, [isMounted, params]);
   return (
     <>
       <Header />

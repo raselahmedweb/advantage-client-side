@@ -9,20 +9,20 @@ import logo from "@/public/logo.png";
 import IconToggler2 from "../icons/IconToggler2";
 import { useAuth } from "../auth/authprovider";
 import Image from "next/image";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 export default function Header() {
   const { setDropMenu } = useAuth();
   const [isMounted, setIsMounted] = useState(false);
-  const [hashPath, setHashPath] = useState("");
-  const trackPath = useSearchParams();
+  const [hashPath, setHashPath] = useState(""); 
+  const params = useParams();
   useEffect(()=>{
     if (isMounted) {
-    setHashPath(window.location.hash); 
+    setHashPath(window.location.hash);
     }else{
       setIsMounted(true);
   }
-  },[isMounted, trackPath])
+  },[isMounted, params])
   const pathname = usePathname();
   const fullPath = `${pathname}${hashPath}`;
 
@@ -56,8 +56,8 @@ export default function Header() {
               <li className={menuClass("/#partner")}>
                 <Link href="#partner">Partnership</Link>
               </li>
-              <li className={menuClass("/#varifiedScout")}>
-                <Link href="#varifiedScout">Scout verification</Link>
+              <li className={menuClass("/#verifiedScout")}>
+                <Link href="#verifiedScout">Scout verification</Link>
               </li>
               <li className={menuClass("/blog")}>
                 <Link href="/blog">Blog</Link>

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useAuth } from "@/components/auth/authprovider";
 import { useEffect, useState } from "react";
 import IconClose from "../icons/icon-close";
@@ -9,14 +9,14 @@ export default function DropDownMenu() {
   const { setDropMenu } = useAuth();
   const [isMounted, setIsMounted] = useState(false);
   const [hashPath, setHashPath] = useState("");
-  const trackPath = useSearchParams();
+  const params = useParams();
   useEffect(() => {
     if (isMounted) {
       setHashPath(window.location.hash);
     } else {
       setIsMounted(true);
     }
-  }, [isMounted, trackPath]);
+  }, [isMounted, params]);
   const pathname = usePathname();
   const fullPath = `${pathname}${hashPath}`;
 
@@ -49,8 +49,8 @@ export default function DropDownMenu() {
         <li className={menuClass("/#partner")}>
           <Link href="#partner">Partnership</Link>
         </li>
-        <li className={menuClass("/#varifiedScout")}>
-          <Link href="#varifiedScout">Scout verification</Link>
+        <li className={menuClass("/#verifiedScout")}>
+          <Link href="#verifiedScout">Scout verification</Link>
         </li>
         <li className={menuClass("/blog")}>
           <Link href="/blog">Blog</Link>

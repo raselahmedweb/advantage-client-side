@@ -81,7 +81,7 @@ export default function Team() {
                   >
                     <Image
                       id={`image-${index}`}
-                      className="object-cover transition-transform duration-500 ease-out"
+                      className="rounded object-cover transition-transform duration-500 ease-out"
                       src={`https://advantage-server-side.onrender.com/photos/team/${member.photo}`}
                       alt="Profile"
                       fill
